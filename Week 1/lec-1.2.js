@@ -1,4 +1,4 @@
-//// Simple Primitives -
+// // Simple Primitives -
 // 1. Write the program to greet a person given their first and last name
 var fname = "Ram";
 var lname = "kumar";
@@ -20,7 +20,7 @@ for (var i = 0; i <= 1000; i++) {
 }
 console.log("count is", ct);
 
-//// Complex Primitives - Arrays, Objects
+// // Complex Primitives - Arrays, Objects
 // 1. Write a program prints all the even numbers in an array
 var arr = [2, 6, 45, 6476, 8767, 83, 8, 27882, 28];
 for (var i = 0; i < arr.length; i++) {
@@ -59,7 +59,7 @@ for (var i = 0; i < arr.length / 2; i++) {
   arr[arr.length - 1 - i] = temp;
 }
 
-//Functions
+// // Functions
 // 1. Write a function that finds the sum of two numbers
 function sum(a, b) {
   return a + b;
@@ -85,3 +85,26 @@ for (let i = 0; i < 10000000000; i++) {
 }
 console.log(res);
 // js(node) is single threaded and if very heavy code is thrown,run like this one then it uses 100% capacity of a single core only.
+
+// // Callbacks
+function sum1(num1, num2, fnToCall) {
+  let result = num1 + num2;
+  // return result;
+  console.log(fnToCall(result));
+}
+function displayResult1(data) {
+  console.log("Result of the sum is : " + data);
+}
+function displayResultPassive1(data) {
+  console.log("Sum's result is : " + data);
+}
+// You are only allowed to call one function after this
+// How will you displayResult of a sum
+const ans = sum(2, 5, displayResult1);
+
+// // setTimeout
+function sayGM() {
+  console.log("Good Morning");
+}
+setTimeout(sayGM, 3 * 2000);
+setInterval(sayGM, 1000);
