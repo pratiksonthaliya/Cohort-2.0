@@ -44,3 +44,12 @@ console.log(ans4);
 const ans5 = arr.filter((i) => {
   return 2 * i === 0;
 });
+
+//Q1
+const arra = ["harkirat", "raman", "parash"];
+const ans7 = arra.filter(function (n) {
+  if (n.startsWith("h")) {
+    return true;
+  } else return false;
+});
+console.log(ans7);
