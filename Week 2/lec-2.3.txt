@@ -1,0 +1,23 @@
+Bash Commands -> use wsl on windows
+Terminal is nothing but another interface to do things on your machine
+
+1. pwd -> print working directory (path to current folder)
+2. cd folder_name -> change directory (use tabs)
+    cd ../ ->  to go back
+    cd ../../ -> go back 2 folders
+3. ls -> listing all the files in current folder (just ls)
+4. mkdir -> make directory/folder (mkdir folder_name)
+5. touch -> create empty file (touch index.js)
+6. cat -> prints the content of a file (cat a.txt, cat test/a.txt)
+7. vi -> edit files on terminal(not for beginners ) exit -> esc :q! enter
+8. mv -> move files (mv a.txt test/) (cd test) (mv a.txt ../)
+9. cp -> copy files (same as above) (cp a.txt test/)
+for copying folder to another folder (cp -r test3 test2)
+
+
+10. nvm -> node version manager -> lets you install node in your machine
+11. npm -> node package manager -> npm install express, npm install axios, etc
+12. node ->  lets you open a js type of environment 
+
+
+13. git -> 
