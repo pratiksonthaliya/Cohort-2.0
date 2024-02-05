@@ -53,7 +53,7 @@ class Calculator {
         this.performOperation(currentNumber, currentOperator);
         currentNumber = "";
         currentOperator = char;
-      } else if (!isNaN(parseInt(char))) {
+      } else if (!isNaN(parseInt(char)) || char === ".") {
         currentNumber += char;
       } else {
         throw new Error("Invalid character in expression: " + char);
@@ -63,6 +63,7 @@ class Calculator {
     // Perform the last operation
     this.performOperation(currentNumber, currentOperator);
   }
+
   performOperation(number, operator) {
     if (number === "") {
       throw new Error("Invalid expression.");
