@@ -1,0 +1,57 @@
+
+
+<!-- // connect frontend and backend using fetch-->
+
+<!-- // fetch -> fn in browser/runtime -> which lets you fetch data from backend/api
+
+// Until now, we’ve sent requests in 2 ways:
+// 1. postman
+// 2. browser url bar
+// 3. using fetch
+
+// Lets say I ask you create an HTML page where
+// 1. You can see the names of 10 people
+// 2. You need to make sure you get these data from an API call
+
+// -->  GET https://fakerapi.it/api/v1/persons -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Hi</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="container">
+  </div>
+  <button onclick="getAnimalData()">Get Animal Data</button>
+  <script>
+    // M1
+    function getAnimalData() {
+        fetch("https://fakerapi.it/api/v1/persons")
+            .then(function(response){
+            response.json()
+            .then(function(finalData){
+                console.log(finalData); document.getElementById("container").innerHTML = JSON.stringify(finalData.data)
+            })
+        })
+     }
+     // M2
+     function getAnimalData() {
+        // alert("Hi someone clicked")
+        fetch("https://fakerapi.it/api/v1/persons")
+            .then(async function(response){
+            const jsonData = await response.json()
+            document.getElementById("container").innerHTML = JSON.stringify(jsonData.data)
+            }
+        )
+    }
+  </script>
+</body>
+
+</html>
