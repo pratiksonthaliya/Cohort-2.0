@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="firstNum" type="text" placeholder="First Number"></input><br><br/>
+    <input id="secondNum" type="text" placeholder="Second Number"></input><br><br/>
+    <button onclick="populateDiv2()">Calculate Sum</button><br><br/>
+    <div id="FinalSum"></div>
+</body>
+<script>
+    function populateDiv() {
+        const a = document.getElementById("firstNum").value;
+        const b = document.getElementById("secondNum").value;
+        // document.getElementById("FinalSum").innerHTML = parseInt(a) + Number(b);
+        // alert("hi")
+
+        fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+            .then((response)=>{
+                response.text()
+                    .then(function(ans){ //returns a promise
+                        console.log(ans);
+                        document.getElementById("FinalSum").innerHTML = ans.toString()
+                    })
+            })
+    }
+    async function populateDiv2() {
+        const a = document.getElementById("firstNum").value;
+        const b = document.getElementById("secondNum").value;
+        // document.getElementById("FinalSum").innerHTML = parseInt(a) + Number(b);
+        // alert("hi")
+
+        const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+        const ans = await response.text();
+           
+        document.getElementById("FinalSum").innerHTML = ans.toString()
+        
+    }
+</script>
+</html>
+
+
+<!-- Debouncing
+deleyed sending of request for searching (reduce number of bekar requests)
+-->

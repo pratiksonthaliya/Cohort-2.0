@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="firstNum" type="text" placeholder="First Number"></input><br><br/>
+    <input id="secondNum" type="text" placeholder="Second Number"></input><br><br/>
+    <button onclick="debouncePopulateDiv()">Calculate Sum</button><br><br/>
+    <div id="FinalSum"></div>
+</body>
+<script>
+    let timeout; 
+    function debouncePopulateDiv() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+            populateDiv()
+        }, 500)
+    }
+    async function populateDiv() {
+        const a = document.getElementById("firstNum").value;
+        const b = document.getElementById("secondNum").value;
+        // document.getElementById("FinalSum").innerHTML = parseInt(a) + Number(b);
+        // alert("hi")
+
+        const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+        const ans = await response.text();
+           
+        document.getElementById("FinalSum").innerHTML = ans.toString()
+        
+    }
+</script>
+</html>
+
+
+<!-- Debouncing
+deleyed sending of request for searching (reduce number of bekar requests)
+-> reduces unnecessay backend requests
+
+Debouncing and throttling are two techniques used in web development to control how often a function is called.
+
+Debouncing: Debouncing is a technique that limits the rate at which a function is called. It ensures that a function is only called after a certain amount of time has passed since the last call. This is useful when you want to delay the execution of a function until after a user has stopped taking a specific action, such as typing in an input field or scrolling a page. Debouncing can help improve performance by reducing the number of unnecessary function calls.
+
+Throttling: Throttling, on the other hand, limits the rate at which a function can be called. It ensures that a function is called at most once every N milliseconds, where N is a predefined interval. Throttling is useful when you want to ensure that a function is not called too frequently, such as in the case of handling scroll events or mouse movements. Throttling can help prevent performance issues caused by excessive function calls.
+
+In summary, debouncing delays the execution of a function until after a certain amount of time has passed since the last call, while throttling limits the rate at which a function can be called to a predefined interval. Both techniques can be useful in different scenarios to control the frequency of function calls and improve performance.
+
+
+
+
+
+
+
+
+-->
