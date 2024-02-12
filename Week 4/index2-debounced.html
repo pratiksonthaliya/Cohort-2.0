@@ -5,9 +5,9 @@
     <title>Document</title>
 </head>
 <body>
-    <input id="firstNum" type="text" placeholder="First Number"></input><br><br/>
-    <input id="secondNum" type="text" placeholder="Second Number"></input><br><br/>
-    <button onclick="debouncePopulateDiv()">Calculate Sum</button><br><br/>
+    <input id="firstNum" oninput="debouncePopulateDiv()" type="text" placeholder="First Number"></input><br><br/>
+    <input id="secondNum" oninput="debouncePopulateDiv()" type="text" placeholder="Second Number"></input><br><br/>
+    <!-- <button onclick="debouncePopulateDiv()">Calculate Sum</button><br><br/> -->
     <div id="FinalSum"></div>
 </body>
 <script>
