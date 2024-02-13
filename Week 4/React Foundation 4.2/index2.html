@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    
+</head>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="title"><br><br/>
+        <input id="description" type="text" placeholder="description"><br><br/>
+        <!-- <button onclick="addTodo()">Add Todo</button> -->
+    </div>
+    <div id="todos"></div>
+</body>
+<script>
+    let globalId = 1;
+
+    function markAsDone(todoId){
+        const todo = document.getElementById(todoId)
+        todo.children[2].innerHTML = "Done!"
+    }
+
+    function createChild(title, description, id){
+        const child = document.createElement("div")
+        const firstGrandChild = document.createElement("div")
+        firstGrandChild.innerHTML = title;
+        const SecondGrandChild = document.createElement("div")
+        SecondGrandChild.innerHTML = description;
+        const thirdGrandChild = document.createElement("button")
+        thirdGrandChild.innerHTML = "Mark as Done";
+        thirdGrandChild.setAttribute("onClick", `markAsDone(${id})`)
+        child.appendChild(firstGrandChild)
+        child.appendChild(SecondGrandChild)
+        child.appendChild(thirdGrandChild)
+        child.setAttribute("id", id)
+        return child
+    }
+
+    // server is sending todos only -> dynamic data
+    // State will always be array
+    // Every elememt of stste world have a title, description and id
+
+    function updateDomAccToState(state){
+        const parent = document.getElementById("todos")
+        parent.innerHTML = "";
+        for(let i=0; i<state.length; i++){
+            const child = createChild(state[i].title, state[i].description, state[i].id)
+            parent.appendChild(child)
+        }
+    }
+    window.setInterval(async function(){
+       const res = await fetch("https://sum-server.100xdevs.com/todos")
+       const json = await res.json();
+       updateDomAccToState(json.todos) 
+    }, 2000)
+    // updateDomAccToState([
+    //     {
+    //         title: "go to gym",
+    //         description: "from 6-7",
+    //         id: 1
+    //     }
+    // ])
+</script>
+</html>
+
+<!-- Problem with this approach - Very hard to add and remove elements 
+No central "State" 
+
+What if there is a server where these todos are put 
+What if you update a TODO from your mobile app 
+You will get back the new array of TODOs on the frontend 
+How will you update the DOM then?  
+You only have a addTodo function 
+You don’t have an updateTodo or removeTodo function yet
+
+ If you can write a function, that takes this state as an input 
+and creates the output on the right, that is much more 
+powerful that our original approach
+
+Dumb Solution
+1.Clear the parent element 
+2. Call addTodo on every element
+
+ Better Solution
+Don’t clear the DOM upfront, update it based on what has changed.
+Question is, how does it calculate what all has changed? 
+Has a todo been marked as complete?
+Has a todo been removed from the backend?
+
+ => By remembering the old todos in a variable (Virtual DOM)
+
+ What is the easiest way to create a dynamic frontend website? 
+1. Update a state variable  -> by us
+2. Delegate the task of figuring out diff to a hefty function -> by react
+3. Tell the hefty function how to add, update and remove elements -> by react-dom
+
+1, 3 -> Usually done by the FE developer
+2 -> Usually done by the React
+
+Reconcilers play a pivotal role in the performance and efficiency of frontend frameworks. 
+They ensure that the DOM is updated in a way that minimizes the number of changes, 
+leading to smoother animations, faster rendering, and a more responsive user experience.
+
+react -> calculate diff, maintains state
+react-dom/reactNative -> add/update/delate elements to dom
+-->
+
