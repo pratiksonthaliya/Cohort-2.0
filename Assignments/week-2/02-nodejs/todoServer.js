@@ -97,6 +97,7 @@ app.delete("/todos/:id", (req, res) => {
   }
 });
 
+// Global Cache
 app.use((req, res) => {
   res.status(404).send();
 });

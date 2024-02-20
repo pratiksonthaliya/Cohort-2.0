@@ -26,9 +26,9 @@ function wait3(t) {
 function calculateTime(t1, t2, t3) {
   const startTime = Date.now();
   return new Promise(async function () {
-    await wait1();
-    await wait2();
-    await wait3();
+    await wait1(t1);
+    await wait2(t2);
+    await wait3(t3);
   }).then(() => {
     return Date.now() - startTime;
   });
