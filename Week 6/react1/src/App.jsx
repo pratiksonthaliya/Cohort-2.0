@@ -3,7 +3,7 @@
 
 import { useState } from "react"
 
-function App2 () {
+const App2 = () => {
   return (
     <div style={{display: "flex"}}>
       <Card>

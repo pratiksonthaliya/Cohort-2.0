@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
+// import { useMemo } from 'react';
 
 // // Hooks -->>
 // These functions that start with use are called hooks
@@ -96,37 +97,81 @@ import { useState, useEffect, useMemo } from 'react'
 
 // export default App;
 
-const App = () => {
-  const [count, setCounter] = useState(0);
-  const [number, setNumber] = useState(0);
-  const [sum, setSum] = useState(0);
+// const App = () => {
+//   const [count, setCounter] = useState(0);
+//   const [number, setNumber] = useState(0);
+//   const [sum, setSum] = useState(0);
 
-  const Sum = useMemo(()=>{
-    let res=0;
-    for(let i=1; i<=number; i++){
-      res+=i;
+//   const Sum = useMemo(()=>{
+//     let res=0;
+//     for(let i=1; i<=number; i++){
+//       res+=i;
+//     }
+//     return res;
+//   }, [number]) 
+
+//   useEffect(()=>{
+//     let res=0;
+//     for(let i=1; i<=number; i++){
+//       res+=i;
+//     }
+//     setSum(res);
+//   }, [number])
+
+//   return(
+//     <div>
+//       <input onChange={(event) => 
+//        setNumber(Number(event.target.value))
+//        } placeholder={"Find sum from 1 to N"}></input>
+//       <h2>Sum is {Sum}</h2>
+//       <h2>Sum is {sum}</h2>
+//       <button onClick={()=>setCounter(count+1)}> Counter {count}</button>
+//     </div>
+//   )
+// }
+
+// export default App
+
+
+// Custom hooks
+ function App() {
+    const todos = useTodos();
+  
+    return <div>
+      {todos.map((todo, id)=>{
+        return(
+          <div key = {id}>
+            <h2>
+              {todo.title}
+            </h2>
+            <h4>
+              {todo.description}
+            </h4>
+          </div>
+        )
+      })
     }
-    return res;
-  }, [number]) 
-
-  useEffect(()=>{
-    let res=0;
-    for(let i=1; i<=number; i++){
-      res+=i;
-    }
-    setSum(res);
-  }, [number])
-
-  return(
-    <div>
-      <input onChange={(event) => 
-       setNumber(Number(event.target.value))
-       } placeholder={"Find sum from 1 to N"}></input>
-      <h2>Sum is {Sum}</h2>
-      <h2>Sum is {sum}</h2>
-      <button onClick={()=>setCounter(count+1)}> Counter {count}</button>
     </div>
-  )
-}
+  }
+  
+  function useTodos(){
+    const [todos, setTodos] = useState({});
+  
+    useEffect(()=>{
+      fetch(`https://sum-server.100xdevs.com/todo?id`)
+      .then(async (res)=>{
+        const json = await res.json();
+        setTodos(json.todo)
+        console.log(json.todo);
+      })
+    }, [])
+    return todos;
+  }
+  
+  export default App;
 
-export default App
+
+
+  // memoizing function -> useCallback
+  // memoizing value/number/string -> useMemo
+  // wrap a component to avoid unnecesarry rerender -> memo
