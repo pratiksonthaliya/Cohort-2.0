@@ -3,7 +3,7 @@
 // import { Client } from 'pg'
  
 // const client = new Client({
-//   connectionString: 'postgresql://my-db_owner:ts0wGNiA8VFx@ep-muddy-tooth-a56dq1uo.us-east-2.aws.neon.tech/my-db?sslmode=require'
+//   connectionString: ''
 // })
 
 // // async function createUsersTable() {
