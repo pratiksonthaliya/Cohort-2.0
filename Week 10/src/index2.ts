@@ -1,7 +1,24 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "console";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient({
+//   log: ['query', 'info', 'warn', 'error']
+// })
+
+
+// to get values as well as data on console 
+const prisma = new PrismaClient({
+  log: [
+    {
+      emit: "event",
+      level: "query"
+    }
+  ]
+})
+prisma.$on("query" , async (e) => {
+  console.log(`${e.query} ${e.params}`);
+  
+})
 
 // async function insertUser(username: string, password: string, firstName: string, lastName: string) {
 //     const res = await prisma.user.create({
@@ -54,3 +71,5 @@ async function getUser(email: string) {
 
 getAllUser()
 getUser('shyam@gmail.com')
+
+
